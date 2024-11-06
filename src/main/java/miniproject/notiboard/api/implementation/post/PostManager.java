@@ -7,6 +7,8 @@ import miniproject.notiboard.jpa.member.Member;
 import miniproject.notiboard.jpa.post.Post;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 public class PostManager {
@@ -21,5 +23,9 @@ public class PostManager {
                 .member(member)
                 .build();
         return postRepository.save(newPost);
+    }
+
+    public List<Post> viewPost() {
+        return postRepository.findAll();
     }
 }
