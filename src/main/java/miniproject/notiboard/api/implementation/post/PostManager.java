@@ -45,4 +45,8 @@ public class PostManager {
         postRepository.findById(postId)
                 .orElseThrow(() -> new PostException(PostExceptionType.POST_NOT_FOUND_EXCEPTION));
     }
+
+    public void deletePost(Long postId) {
+        postRepository.deleteById(postId);
+    }
 }
