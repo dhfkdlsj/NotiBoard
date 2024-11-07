@@ -7,7 +7,7 @@ import miniproject.notiboard.exception.Status;
 @AllArgsConstructor
 public enum PostExceptionType implements ExceptionType {
 
-    POST_NOT_FOUND_EXCEPTION(Status.NOT_FOUND, "게시을를 찾을 수 없습니다.");
+    POST_NOT_FOUND_EXCEPTION(Status.NOT_FOUND, "게시물을 찾을 수 없습니다.");
 
     private final Status status;
     private final String message;

@@ -1,4 +1,4 @@
 package miniproject.notiboard.api.business.post.dto.response;
 
-public record ViewPostsResp(String title, Long postId) {
+public record UpdatePostResp(String title) {
 }

@@ -3,7 +3,10 @@ package miniproject.notiboard.api.presentation.controller.post;
 import lombok.RequiredArgsConstructor;
 import miniproject.notiboard.api.business.post.PostManigingUsecase;
 import miniproject.notiboard.api.business.post.dto.request.AddPostReq;
+import miniproject.notiboard.api.business.post.dto.request.UpdatePostReq;
 import miniproject.notiboard.api.business.post.dto.response.AddPostResp;
+import miniproject.notiboard.api.business.post.dto.response.UpdatePostResp;
+import miniproject.notiboard.api.business.post.dto.response.ViewPostsDetailResp;
 import miniproject.notiboard.api.business.post.dto.response.ViewPostsResp;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -27,17 +30,23 @@ public class PostController {
 
     @GetMapping("/view")
     public ResponseEntity<List<ViewPostsResp>> viewPosts() {
-        List<ViewPostsResp> posts = postManigingUsecase.viewPosts(); // 게시글 리스트 가져오기
-        return ResponseEntity.ok(posts); // JSON 형식으로 반환
+        List<ViewPostsResp> posts = postManigingUsecase.viewPosts();
+        return ResponseEntity.ok(posts);
     }
 
-    @GetMapping("/add")
-    public String showAddPostPage(Model model) {
-        return "addPost"; // addPost.html을 렌더링
+    @PatchMapping("/update/{postId}")
+    public ResponseEntity<UpdatePostResp> updatePost(@PathVariable Long postId, @RequestBody UpdatePostReq req) {
+        UpdatePostResp resp = postManigingUsecase.updatePost(postId, req);
+        return ResponseEntity.ok(resp);
     }
 
-    @GetMapping("")
-    public String showViewPostsPage(Model model) {
-        return "viewPosts"; // viewPosts.html을 렌더링
+    @GetMapping("/view/{postId}")
+    public ResponseEntity<ViewPostsDetailResp> showPostDetailPage(@PathVariable Long postId, Model model) {
+        ViewPostsDetailResp resp = postManigingUsecase.viewPostsDetail(postId);
+        return ResponseEntity.ok(resp);
     }
+
+
+
+
 }

@@ -2,6 +2,7 @@ package miniproject.notiboard.api.implementation.post;
 
 import lombok.RequiredArgsConstructor;
 import miniproject.notiboard.api.business.post.dto.request.AddPostReq;
+import miniproject.notiboard.api.business.post.dto.request.UpdatePostReq;
 import miniproject.notiboard.api.persistence.post.PostRepository;
 import miniproject.notiboard.jpa.member.Member;
 import miniproject.notiboard.jpa.post.Post;
@@ -27,5 +28,21 @@ public class PostManager {
 
     public List<Post> viewPost() {
         return postRepository.findAll();
+    }
+
+    public Post viewPostDetail(Long postId) {
+        return postRepository.findById(postId)
+                .orElseThrow(() -> new PostException(PostExceptionType.POST_NOT_FOUND_EXCEPTION));
+    }
+
+    public void updatePost(Long postId, UpdatePostReq req) {
+        Post post = postRepository.findById(postId)
+                .orElseThrow(() -> new PostException(PostExceptionType.POST_NOT_FOUND_EXCEPTION));
+        post.updatePost(req.title(),req.content());
+    }
+
+    public void checkExistsPost(Long postId) {
+        postRepository.findById(postId)
+                .orElseThrow(() -> new PostException(PostExceptionType.POST_NOT_FOUND_EXCEPTION));
     }
 }
