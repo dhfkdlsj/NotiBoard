@@ -48,4 +48,10 @@ public class PostController {
         return ResponseEntity.ok("성공적으로 " + postId+ " 번 게시글이 삭제되었습니다.");
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<SearchPostsResp>> searchPosts(@RequestParam String title) {
+        List<SearchPostsResp> resp = postManigingUsecase.searchPosts(title);
+        return ResponseEntity.ok(resp);
+    }
+
 }

@@ -12,4 +12,5 @@ public interface PostManigingUsecase {
     ViewPostsDetailResp viewPostsDetail(Long postId);
     void updatePost(Long postId, UpdatePostReq req);
     void deletePost(Long postId);
+    List<SearchPostsResp> searchPosts(String title);
 }

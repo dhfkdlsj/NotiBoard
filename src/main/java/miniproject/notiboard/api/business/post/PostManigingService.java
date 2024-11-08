@@ -53,4 +53,12 @@ public class PostManigingService implements PostManigingUsecase{
         postManager.deletePost(postId);
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public List<SearchPostsResp> searchPosts(String title) {
+        postManager.checkExistsPost(title);
+        List<Post> posts = postManager.searchPosts(title);
+        return postDtoMapper.toSearchPostsResp(posts);
+    }
+
 }

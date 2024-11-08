@@ -22,4 +22,13 @@ public class PostDtoMapper {
     public ViewPostsDetailResp toViewPostDetailResp(Post post) {
         return new ViewPostsDetailResp(post.getId(), post.getTitle(), post.getContent());
     }
+
+    public List<SearchPostsResp> toSearchPostsResp(List<Post> posts) {
+        return posts.stream()
+                .map(post -> new SearchPostsResp(
+                        post.getTitle(),
+                        post.getMember().getName()
+                ))
+                .collect(Collectors.toList());
+    }
 }
